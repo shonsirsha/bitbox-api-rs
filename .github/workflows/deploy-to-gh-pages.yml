@@ -24,7 +24,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y clang jq
-        cargo install wasm-pack
+        cargo install --force wasm-pack
 
     - name: Build WebAssembly Module
       run: |
@@ -43,5 +43,5 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages  
-        folder: sandbox/build     
+        folder: sandbox/dist     
         token: ${{ secrets.GITHUB_TOKEN }} 
