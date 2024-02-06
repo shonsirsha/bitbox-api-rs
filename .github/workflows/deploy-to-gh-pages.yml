@@ -1,0 +1,47 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master-pg  
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 
+
+    - name: Setup Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        override: true
+    
+    - name: Install wasm-pack, clang, and jq
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang jq
+        cargo install wasm-pack
+
+    - name: Build WebAssembly Module
+      run: |
+        make wasm
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' 
+    
+    - name: Install Dependencies and Build Project
+      run: |
+        make build-sandbox
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages  
+        folder: build     
+        token: ${{ secrets.GITHUB_TOKEN }} 
