@@ -3,7 +3,7 @@ name: Rust
 on: [push, pull_request]
 
 jobs:
-  # Stable:
+  Stable:
   #   name: Test - stable toolchain
   #   runs-on: ubuntu-latest
   #   strategy:
@@ -18,7 +18,7 @@ jobs:
   #         sudo apt-get install -y libudev-dev
   #         ./ci.sh
 
-  # Beta:
+  Beta:
   #   name: Test - beta toolchain
   #   runs-on: ubuntu-latest
   #   strategy:
@@ -34,7 +34,7 @@ jobs:
   #         ./ci.sh
 
 
-  # Nightly:
+  Nightly:
   #   name: Test - nightly toolchain
   #   runs-on: ubuntu-latest
   #   strategy:
@@ -62,7 +62,7 @@ jobs:
           make wasm
           make build-sandbox
 
-  # Check-Protobufs:
+  Check-Protobufs:
   #   name: Check that the generated protobuf file is up to date
   #   runs-on: ubuntu-latest
   #   steps:
