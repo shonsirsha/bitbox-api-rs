@@ -3,7 +3,7 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master-pg  
+      - master-pg
 
 jobs:
   build-and-deploy:
@@ -14,19 +14,15 @@ jobs:
         fetch-depth: 0 
 
     - name: Setup Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        profile: minimal
-        override: true
-    
+      uses: dtolnay/rust-toolchain@stable
+  
     - name: Install wasm-pack, clang, and jq
       run: |
         sudo apt-get update
         sudo apt-get install -y clang jq
         cargo install --force wasm-pack
 
-    - name: Build WebAssembly Module
+    - name: Build WASM
       run: |
         make wasm
 
@@ -35,7 +31,7 @@ jobs:
       with:
         node-version: '18' 
     
-    - name: Install Dependencies and Build Project
+    - name: Install Sandbox Dependencies and Build Sandbox
       run: |
         make build-sandbox
 

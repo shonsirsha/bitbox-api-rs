@@ -4,50 +4,50 @@ on: [push, pull_request]
 
 jobs:
   Stable:
-  #   name: Test - stable toolchain
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     fail-fast: false
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: dtolnay/rust-toolchain@stable
-  #       with:
-  #         components: clippy, rustfmt
-  #     - run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y libudev-dev
-  #         ./ci.sh
+    name: Test - stable toolchain
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y libudev-dev
+          ./ci.sh
 
   Beta:
-  #   name: Test - beta toolchain
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     fail-fast: false
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: dtolnay/rust-toolchain@beta
-  #       with:
-  #         components: clippy, rustfmt
-  #     - run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y libudev-dev
-  #         ./ci.sh
+    name: Test - beta toolchain
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@beta
+        with:
+          components: clippy, rustfmt
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y libudev-dev
+          ./ci.sh
 
 
   Nightly:
-  #   name: Test - nightly toolchain
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     fail-fast: false
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: dtolnay/rust-toolchain@nightly
-  #       with:
-  #         components: clippy, rustfmt
-  #     - run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y libudev-dev
-  #         ./ci.sh
+    name: Test - nightly toolchain
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: clippy, rustfmt
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y libudev-dev
+          ./ci.sh
 
   WASM:
     name: WASM and Sandbox
@@ -63,14 +63,14 @@ jobs:
           make build-sandbox
 
   Check-Protobufs:
-  #   name: Check that the generated protobuf file is up to date
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: dtolnay/rust-toolchain@stable
-  #     - run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y protobuf-compiler
-  #         cargo install rust-script
-  #         make build-protos
-  #         git diff --quiet
+    name: Check that the generated protobuf file is up to date
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y protobuf-compiler
+          cargo install rust-script
+          make build-protos
+          git diff --quiet
